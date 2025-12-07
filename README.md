@@ -61,21 +61,3 @@ cd /Users/thanakorn/Downloads/noodle_system
 php -S localhost:8000
 ```
 และเปิด `http://localhost:8000/index.php`
-
-**การแก้ปัญหาเบื้องต้น:**
-- หน้าแอปแสดงข้อความ Fatal error เกี่ยวกับฐานข้อมูล: ตรวจสอบว่า DB ถูกสร้างและตารางมีข้อมูลหรือไม่ (ดู logs ของ `db` และ `web`)
-- ถ้า SQL import ล้มเหลวเพราะ foreign key: ใช้วิธี import โดยปิด `FOREIGN_KEY_CHECKS` ชั่วคราว (ตัวอย่างคำสั่งด้านบน)
-- ถ้าไฟล์ `db.php` เป็นไฟล์ว่างหรือหาย ให้คืนค่าไฟล์ตามตัวอย่างใน repo เพื่อเชื่อมต่อ DB
-- ถ้าไฟล์ไม่ถูกแมปเข้า container ให้ตรวจสิทธิ์/owner ของไฟล์บน host หรือแก้ `docker-compose.yml` ให้แมป path ที่ถูกต้อง
-
-**สิ่งที่ผมได้แก้ให้ใน repository นี้:**
-- คืนค่า `db.php` (เพิ่มการเชื่อมต่อ MySQL)
-- แก้ชื่อไฟล์ SQL (`4685002_project.sql`) เพื่อเอาช่องว่างออก
-- อัปเดต `docker-compose.yml` ให้แมตช์ฐานข้อมูลและแมปโฟลเดอร์โปรเจกต์เป็นเว็บ root
-- เพิ่มการตรวจสอบ input และ query ใน `add_to_cart.php`, `confirm.php`, `review.php` และ escape output ใน `index.php`
-
-**คำแนะนำต่อ:**
-- ถ้าต้องการ ผมสามารถช่วยทำให้ปลอดภัยขึ้น (prepared statements), ล้าง/ปรับ permission ของไฟล์ที่แมปกับ Docker, หรือลบการเตือนเกี่ยวกับ `ServerName` ใน Apache
-
-ถ้าต้องการให้ผมเพิ่มหัวข้อหรือคำอธิบายเพิ่มเติมใน `README.md` บอกได้เลยครับ
-# noodlesystem
