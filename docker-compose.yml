@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:8.2-apache
+    container_name: food_web
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    command: bash -c "docker-php-ext-install mysqli && apache2-foreground"
+
+  db:
+    image: mysql:8.0
+    container_name: food_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: 4685002_project
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./4685002_project.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
